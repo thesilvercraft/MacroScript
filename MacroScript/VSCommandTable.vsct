@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h" />
+  <Extern href="vsshlids.h" />
+  <Include href="KnownImageIds.vsct" />
+  <Include href="VSGlobals.vsct" />
+
+  <Commands package="MacroScript">
+    <Groups>
+      <Group guid="MacroScript" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="VSMainMenu" id="Tools" />
+      </Group>
+    </Groups>
+
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      
+      <Button guid="guidMacroScriptPackageCmdSet" id="cmdidMainToolWindoCommand" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>MainToolWindo</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\MainToolWindoCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+    </Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="MacroScript" value="{73403a68-6dc3-4748-b9e3-b57e81c1814d}">
+      <IDSymbol name="MyMenuGroup" value="0x0001" />
+      <IDSymbol name="MyCommand" value="0x0100" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{a6fb8673-00d0-4a80-8967-8a1d5c970b27}" name="guidMacroScriptPackageCmdSet">
+      <IDSymbol value="256" name="cmdidMainToolWindoCommand" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{60e9de1b-580e-4910-af6f-bc04fc44a620}" name="guidImages">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

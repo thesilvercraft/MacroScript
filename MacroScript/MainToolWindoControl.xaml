@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="MacroScript.MainToolWindoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
+             Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800"
+             Name="MyToolWindow">
+    <Grid>
+        <Grid Name="mainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Click="Button_Click" Width="100">🏃RUN</Button>
+                <TextBox Width="200" Name="fileNameBx" KeyUp="TextBox_KeyUp" GotFocus="fileNameBx_GotFocus" LostFocus="fileNameBx_LostFocus"></TextBox>
+
+                <Button Click="LoadButton" Width="50">🔃</Button>
+                <Button Click="SaveButton" Width="50">💾</Button>
+
+            </StackPanel>
+            <TextBox Name="MainTextBox" Grid.Row="1" TextWrapping="Wrap"
+  AcceptsReturn="True"
+  VerticalScrollBarVisibility="Visible">
+
+            </TextBox>
+
+
+        </Grid>
+        <Border Width="298" Height="150" Background="Gray" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="resultStack"></StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+    
+    
+</UserControl>
