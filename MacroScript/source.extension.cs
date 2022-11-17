@@ -12,7 +12,7 @@ namespace MacroScript
         public const string Description = @"A scripting module that aids in coding by letting the developer code scripts that extend visual studio's functionality.";
         public const string Language = "en-US";
         public const string Version = "4.2";
-        public const string Author = "Silver Dimond";
+        public const string Author = "SilverCraft";
         public const string Tags = "";
     }
 }
