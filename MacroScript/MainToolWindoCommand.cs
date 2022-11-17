@@ -22,7 +22,7 @@ namespace MacroScript
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("a6fb8673-00d0-4a80-8967-8a1d5c970b27");
+        public static readonly Guid CommandSet = new("a6fb8673-00d0-4a80-8967-8a1d5c970b27");
 
         /// <summary>
         /// VS Package that provides this command, not null.

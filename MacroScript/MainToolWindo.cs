@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Imaging;
+using Microsoft.VisualStudio.Imaging.Interop;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text.Editor;
 using System;
 using System.ComponentModel.Composition;
@@ -29,6 +31,7 @@ namespace MacroScript
         {
             this.Caption = "MacroScript";
 
+            this.BitmapImageMoniker= new ImageMoniker { Guid = new Guid("8a707422-135a-4352-9830-31a4933254c6"), Id = 0};
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on
             // the object returned by the Content property.

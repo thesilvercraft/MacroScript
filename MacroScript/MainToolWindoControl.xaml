@@ -15,20 +15,22 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Button Click="Button_Click" Width="100">🏃RUN</Button>
-                <TextBox Width="200" Name="fileNameBx" KeyUp="TextBox_KeyUp" GotFocus="fileNameBx_GotFocus" LostFocus="fileNameBx_LostFocus"></TextBox>
-
-                <Button Click="LoadButton" Width="50">🔃</Button>
-                <Button Click="SaveButton" Width="50">💾</Button>
-
-            </StackPanel>
-            <TextBox Name="MainTextBox" Grid.Row="1" TextWrapping="Wrap"
-  AcceptsReturn="True"
-  VerticalScrollBarVisibility="Visible">
-
-            </TextBox>
-
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Click="Button_Click" Grid.Column="0" Grid.ColumnSpan="2">🏃RUN</Button>
+                <TextBox Grid.Column="2" Grid.ColumnSpan="3" Name="fileNameBx" KeyUp="TextBox_KeyUp" GotFocus="fileNameBx_GotFocus" LostFocus="fileNameBx_LostFocus"/>
+                <Button Click="LoadButton" Grid.Column="5">🔃</Button>
+                <Button Click="SaveButton" Grid.Column="6" >💾</Button>
+            </Grid>
+            <TextBox Name="MainTextBox" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
 
         </Grid>
         <Border Width="298" Height="150" Background="Gray" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
@@ -37,6 +39,6 @@
             </ScrollViewer>
         </Border>
     </Grid>
-    
-    
+
+
 </UserControl>

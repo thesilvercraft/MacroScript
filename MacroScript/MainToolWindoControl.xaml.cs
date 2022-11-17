@@ -51,29 +51,7 @@ namespace MacroScript
                     MainTextBox.Text = File.ReadAllText(defaultcs);
                 }
             }
-            /*
-           IVsEditorAdaptersFactoryService editorAdapterFactoryService = MyComponentModel.GetService<IVsEditorAdaptersFactoryService>();
-           codeWindow = editorAdapterFactoryService.CreateVsCodeWindowAdapter(OleServiceProvider);
-           IntPtr docDataPointer = IntPtr.Zero;
-           var tbf = MyComponentModel.GetService<ITextBufferFactoryService>();
-           var ctr = MyComponentModel.GetService<IContentTypeRegistryService>();
-           var csct = ctr.GetContentType(ContentTypes.CSharp);
-           var tb = tbf.CreateTextBuffer("using System;\r\n Console.WriteLine(1);", csct);
 
-          // this.codeWindow.SetBuffer(tb);
-           this.codeWindow.GetPrimaryView(out this.textView);
-           IWpfTextViewHost textViewHost = editorAdapterFactoryService.GetWpfTextViewHost(this.textView);
-           mainGrid.Children.Add(textViewHost.HostControl);
-
-           var factory = MyComponentModel.GetService<ITextEditorFactoryService>();
-
-           var classification = MyComponentModel.GetService<IClassificationTypeRegistryService>();
-
-           var clast = classification.GetClassificationType(ContentTypes.CSharp);
-           var f = factory.CreateTextView(tb); 
-           f.
-           var f2 = factory.CreateTextViewHost(f,true);
-           */
         }
         private readonly string[] _imports =
     {
@@ -86,7 +64,7 @@ namespace MacroScript
             try
             {
                 var script = CSharpScript.Create(MainTextBox.Text,
-            ScriptOptions.Default
+                    ScriptOptions.Default
                     .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
                         .Where(xa => !xa.IsDynamic && !string.IsNullOrWhiteSpace(xa.Location))).WithImports(_imports),
                 typeof(Global));
@@ -121,21 +99,18 @@ namespace MacroScript
         string PathToUserTemplates = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "MacroScript");
         private void addItem(string text)
         {
-            TextBlock block = new TextBlock();
+            //https://social.technet.microsoft.com/wiki/contents/articles/31190.autocomplete-textbox-in-wpf-without-third-party-libraries.aspx
+            TextBlock block = new()
+            {
+                Text = text,
 
-            // Add the text
-            block.Text = text;
-
-            // A little style...
-            block.Margin = new Thickness(2, 3, 2, 3);
-            block.Cursor = Cursors.Hand;
-
-            // Mouse events
+                Margin = new Thickness(2, 3, 2, 3),
+                Cursor = Cursors.Hand
+            };
             block.MouseLeftButtonUp += (sender, e) =>
             {
                 fileNameBx.Text = (sender as TextBlock).Text;
             };
-
             block.MouseEnter += (sender, e) =>
             {
                 TextBlock b = sender as TextBlock;
@@ -147,8 +122,6 @@ namespace MacroScript
                 TextBlock b = sender as TextBlock;
                 b.Background = Brushes.Transparent;
             };
-
-            // Add to the panel
             resultStack.Children.Add(block);
         }
         private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
@@ -161,24 +134,20 @@ namespace MacroScript
 
             if (query.Length == 0)
             {
-                // Clear
                 resultStack.Children.Clear();
-                border.Visibility = System.Windows.Visibility.Collapsed;
+                border.Visibility = Visibility.Collapsed;
             }
             else
             {
-                border.Visibility = System.Windows.Visibility.Visible;
+                border.Visibility = Visibility.Visible;
             }
 
-            // Clear the list
             resultStack.Children.Clear();
 
-            // Add the result
             foreach (var obj in data)
             {
                 if (obj.ToLower().StartsWith(query.ToLower()))
                 {
-                    // The word starts with this... Autocomplete must work
                     addItem(obj);
                     found = true;
                 }
