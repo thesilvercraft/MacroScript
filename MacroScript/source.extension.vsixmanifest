@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="MacroScript.105d5efd-8a92-44a3-bf70-c94e2487a28b" Version="4.2" Language="en-US" Publisher="SilverCraft" />
+        <Identity Id="MacroScript.105d5efd-8a92-44a3-bf70-c94e2487a28b" Version="5.2" Language="en-US" Publisher="SilverCraft" />
         <DisplayName>MacroScript</DisplayName>
         <Description xml:space="preserve">A scripting module that aids in coding by letting the developer code scripts that extend visual studio's functionality.</Description>
         <MoreInfo>https://github.com/thesilvercraft/MacroScript</MoreInfo>

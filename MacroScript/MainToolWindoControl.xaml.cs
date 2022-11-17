@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.OLE.Interop;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Design.Serialization;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -59,7 +60,7 @@ namespace MacroScript
         "System.Text", "System.Text.RegularExpressions", "System.Threading.Tasks", "System.Linq",
         "System.Globalization", "EnvDTE"
     };
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -68,16 +69,20 @@ namespace MacroScript
                     .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
                         .Where(xa => !xa.IsDynamic && !string.IsNullOrWhiteSpace(xa.Location))).WithImports(_imports),
                 typeof(Global));
-                var g = new Global();
-                IComponentModel MyComponentModel = Package.GetGlobalService(typeof(SComponentModel)) as IComponentModel;
-                SVsServiceProvider ServiceProvider = MyComponentModel.GetService<SVsServiceProvider>();
-                g.DTE = (DTE)ServiceProvider.GetService(typeof(DTE));
-                g.package = MainToolWindoCommand.Instance.package;
-                var s = script.RunAsync(g);
+                var g = new Global
+                {
+                    DTE = MacroScriptPackage.dte,
+                    package = MainToolWindoCommand.Instance.package
+                };
+                var s = await script.RunAsync(g);
             }
             catch (CompilationErrorException ex)
             {
                 MessageBox.Show(string.Join("\n",ex.Diagnostics));
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
             }
         }
 
@@ -174,7 +179,7 @@ namespace MacroScript
     }
     public class Global
     {
-        public DTE DTE;
+        public DTE2 DTE;
         public Package package;
     }
 }
